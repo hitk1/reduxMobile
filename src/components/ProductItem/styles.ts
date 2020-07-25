@@ -77,3 +77,31 @@ export const ButtonText = styled.Text`
     font-weight: bold;
 `;
 
+export const AmountWrapper = styled.View`
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 5px 50px;
+    border: 1px solid #333;
+    border-radius: 15px;
+`;
+
+export const SubButton = styled(RectButton)`
+
+    background: #FFF;
+    border-radius: 100px;
+    
+    align-self: flex-end;
+    margin: 7px 7px 0 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+export const AddButton = styled(RectButton)``;
+
+

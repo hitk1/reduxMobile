@@ -1,7 +1,9 @@
-import { IProducts } from "src/Screens/Home/interfaces";
+import { IProduct } from "../../Screens/Home/interfaces";
 
 export interface IProps {
-    item: IProducts
+    item: IProduct
+    addToCartFunction(item: IProduct): void
+    amount: number
 }
 
 export interface IMyItems {

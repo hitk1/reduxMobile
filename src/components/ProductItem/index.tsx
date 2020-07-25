@@ -1,18 +1,28 @@
-import React, { useCallback, useState, useEffect } from 'react';
-import { Text } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons'
+import React, { useCallback, useState, useEffect, memo } from 'react';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Text } from 'react-native'
+
 import { IProps, IMyItems } from './interfaces';
-import { IProducts } from 'src/Screens/Home/interfaces';
+import {
+    Container,
+    ProductImage,
+    Title,
+    TopWrapper,
+    FavoriteIconWrapper,
+    BottomWrapper,
+    Price,
+    ButtonAmountWrapper,
+    AddToCartButton,
+    ButtonText,
+    AmountWrapper,
+    SubButton,
+    AddButton
+} from './styles';
 
-import { Container, ProductImage, Title, TopWrapper, FavoriteIconWrapper, BottomWrapper, Price, ButtonAmountWrapper, AddToCartButton, ButtonText } from './styles';
+const ProductItem: React.FC<IProps> = ({ item,
+    addToCartFunction, amount }) => {
 
-const ProductItem: React.FC<IProps> = ({ item }) => {
-
-    const [myItem, setMyItem] = useState<IMyItems>({...item, isFavorite: false})
-
-    const addToCart = useCallback(() => {
-
-    }, [])
+    const [myItem, setMyItem] = useState<IMyItems>({ ...item, isFavorite: false })
 
     return (
         <Container style={{ margin: 1 }}>
@@ -36,21 +46,35 @@ const ProductItem: React.FC<IProps> = ({ item }) => {
 
             <BottomWrapper>
                 <Price>R$ {myItem.price}</Price>
-                <ButtonAmountWrapper>
-                    <AddToCartButton
-                        onPress={() => addToCart()}
-                        style={{
-                            shadowColor: '#000',
-                            shadowOffset: { width: 0, height: 2 },
-                            shadowOpacity: 0.8,
-                            shadowRadius: 2,
-                            elevation: 2,
-                        }}
-                    >
-                        <ButtonText>Adicionar</ButtonText>
-                    </AddToCartButton>
+                {amount > 0
+                    ?
+                    <AmountWrapper>
+                        <SubButton>
+                            <Icon name="remove" size={16} color="#333" />
+                        </SubButton>
+                        <Text>{amount}</Text>
+                        <AddButton>
+                            <Icon name="add" size={16} color="#333" />
+                        </AddButton>
+                    </AmountWrapper>
+                    :
+                    <ButtonAmountWrapper>
+                        <AddToCartButton
+                            onPress={() => { addToCartFunction(item) }}
+                            style={{
+                                shadowColor: '#000',
+                                shadowOffset: { width: 0, height: 2 },
+                                shadowOpacity: 0.8,
+                                shadowRadius: 2,
+                                elevation: 2,
+                            }}
+                        >
+                            <ButtonText>Adicionar</ButtonText>
+                        </AddToCartButton>
 
-                </ButtonAmountWrapper>
+                    </ButtonAmountWrapper>
+                }
+
             </BottomWrapper>
         </Container>
     )
