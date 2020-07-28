@@ -12,6 +12,11 @@ export const removeFromCart = (productId: number): IActionFunction<number> => ({
     data: productId
 })
 
+export const subtractFromCart = (productId: number): IActionFunction<number> => ({
+    type: 'SUBTRACT_FROM_CART',
+    data: productId
+})
+
 
 export default function cart(state = <IProduct[]>[], { type, data }: IActionFunction<any>): IProduct[] | undefined {
     switch (type) {
@@ -30,7 +35,21 @@ export default function cart(state = <IProduct[]>[], { type, data }: IActionFunc
             })
         case 'REMOVE_FROM_CART':
             return produce(state, (draft: IProduct[]) => {
-                draft.splice(draft.findIndex(item => item.id === data))
+                draft.splice(draft.findIndex(item => item.id === data)) //data é o productId neste caso
+            })
+        
+        case 'SUBTRACT_FROM_CART':
+            return produce(state, (draft: IProduct[]) => {
+
+                const productIndex = draft.findIndex(item => item.id === data)
+
+                if(productIndex != -1){
+                    if(draft[productIndex].amount > 1)
+                        draft[productIndex].amount -= 1
+                    else
+                        draft.splice(productIndex, 1)
+                }
+
             })
 
         default: return state

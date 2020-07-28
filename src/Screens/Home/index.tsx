@@ -7,7 +7,7 @@ import { IProduct } from './interfaces';
 import ProductItem from '../../components/ProductItem'
 import api from '../../service/api'
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, removeFromCart } from '../../store/reducers/cart/reducer'
+import { addToCart, subtractFromCart } from '../../store/reducers/cart/reducer'
 
 const numColumns = 2
 const Home: React.FC = () => {
@@ -31,15 +31,16 @@ const Home: React.FC = () => {
         return amount
     }, {}))
 
-    const handleAddToCart = useCallback(product => {
+    const handleAddToCart = useCallback((product: IProduct) => {
         dispatch(addToCart(product))
+    }, [])
 
-        console.tron.log(amount)
+    const handleSubFromCart = useCallback((id: number) => {
+        dispatch(subtractFromCart(id))
     }, [])
 
     return (
         <Container>
-            {/* {console.tron.log(amount)} */}
             <FlatList
                 data={products}
                 style={{ marginHorizontal: 3 }}
@@ -48,8 +49,9 @@ const Home: React.FC = () => {
                 renderItem={({ item }) => (
                     <ProductItem
                         item={item}
-                        addToCartFunction={handleAddToCart}
                         amount={amount[item.id] | 0}
+                        addToCartFunction={handleAddToCart}
+                        subtractFromCartFunction={handleSubFromCart}
                     />
                 )}
                 numColumns={numColumns}

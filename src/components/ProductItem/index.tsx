@@ -19,8 +19,11 @@ import {
     AddButton
 } from './styles';
 
-const ProductItem: React.FC<IProps> = ({ item,
-    addToCartFunction, amount }) => {
+const ProductItem: React.FC<IProps> = ({
+    item,
+    amount,
+    addToCartFunction,
+    subtractFromCartFunction }) => {
 
     const [myItem, setMyItem] = useState<IMyItems>({ ...item, isFavorite: false })
 
@@ -49,11 +52,15 @@ const ProductItem: React.FC<IProps> = ({ item,
                 {amount > 0
                     ?
                     <AmountWrapper>
-                        <SubButton>
+                        <SubButton
+                            onPress={() => { subtractFromCartFunction(item.id) }}
+                        >
                             <Icon name="remove" size={16} color="#333" />
                         </SubButton>
                         <Text>{amount}</Text>
-                        <AddButton>
+                        <AddButton
+                            onPress={() => { addToCartFunction(item) }}
+                        >
                             <Icon name="add" size={16} color="#333" />
                         </AddButton>
                     </AmountWrapper>

@@ -84,24 +84,29 @@ export const AmountWrapper = styled.View`
     align-items: center;
     justify-content: space-between;
 
-    padding: 5px 50px;
+    background: #FFF;
+
+    height: 35px;
+    width: 130px;
+    padding: 5px 7px;
     border: 1px solid #333;
     border-radius: 15px;
 `;
 
 export const SubButton = styled(RectButton)`
-
-    background: #FFF;
     border-radius: 100px;
-    
-    align-self: flex-end;
-    margin: 7px 7px 0 0;
 
+    padding: 5px;
     display: flex;
     align-items: center;
-    justify-content: center;
 `;
 
-export const AddButton = styled(RectButton)``;
+export const AddButton = styled(RectButton)`
+    border-radius: 100px;
+
+    padding: 5px;
+    display: flex;
+    align-items: center;
+`;
 
 

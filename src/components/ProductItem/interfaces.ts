@@ -2,8 +2,9 @@ import { IProduct } from "../../Screens/Home/interfaces";
 
 export interface IProps {
     item: IProduct
-    addToCartFunction(item: IProduct): void
     amount: number
+    addToCartFunction(item: IProduct): void
+    subtractFromCartFunction(productId: number): void
 }
 
 export interface IMyItems {
