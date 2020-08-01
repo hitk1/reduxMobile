@@ -35,7 +35,7 @@ export default function cart(state = <IProduct[]>[], { type, data }: IActionFunc
             })
         case 'REMOVE_FROM_CART':
             return produce(state, (draft: IProduct[]) => {
-                draft.splice(draft.findIndex(item => item.id === data)) //data é o productId neste caso
+                draft.splice(draft.findIndex(item => item.id === data), 1) //data é o productId neste caso
             })
         
         case 'SUBTRACT_FROM_CART':

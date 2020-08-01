@@ -8,6 +8,7 @@ import ProductItem from '../../components/ProductItem'
 import api from '../../service/api'
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, subtractFromCart } from '../../store/reducers/cart/reducer'
+import { formatPrice } from '../../util/format';
 
 const numColumns = 2
 const Home: React.FC = () => {
@@ -39,6 +40,8 @@ const Home: React.FC = () => {
         dispatch(subtractFromCart(id))
     }, [])
 
+    const formatCurrencyBRL = useCallback((value: number) => formatPrice(value), [])
+
     return (
         <Container>
             <FlatList
@@ -48,7 +51,10 @@ const Home: React.FC = () => {
                 keyExtractor={item => String(item.id)}
                 renderItem={({ item }) => (
                     <ProductItem
-                        item={item}
+                        item={{
+                            ...item,
+                            formatedPrice: formatCurrencyBRL(item.price)
+                        }}
                         amount={amount[item.id] | 0}
                         addToCartFunction={handleAddToCart}
                         subtractFromCartFunction={handleSubFromCart}

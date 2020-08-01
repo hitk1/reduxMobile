@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Image } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import FontAwesomeIcons from 'react-native-vector-icons/FontAwesome5'
@@ -36,24 +36,27 @@ const CartProductItem: React.FC<IProps> = ({
             />
             <ProductDescriptionWrapper>
                 <ProductTitle>{item.title}</ProductTitle>
-                <ProductPrice>R$ {item.price}</ProductPrice>
+                <ProductPrice>{item.formatedPrice}</ProductPrice>
             </ProductDescriptionWrapper>
             <QuantityWrapper>
-                <SubButton
-                    onPress={() => subtractFromCartFunction(item.id)}
-                >
-                    <MaterialIcons name="remove" size={16} color="#FFF" />
-                </SubButton>
-                <Amount>{item.amount}</Amount>
+
                 <AddButton
                     onPress={() => addToCartFunction(item)}
                 >
                     <MaterialIcons name="add" size={16} color="#FFF" />
                 </AddButton>
+                <Amount>{item.amount}</Amount>
+                <SubButton
+                    onPress={() => subtractFromCartFunction(item.id)}
+                >
+                    <MaterialIcons name="remove" size={16} color="#FFF" />
+                </SubButton>
             </QuantityWrapper>
 
-            <RemoveButton>
-                <FontAwesomeIcons name="trash-alt" size={16} color="#FFF" 
+            <RemoveButton
+                onPress={() => removeFromCartFunction(item.id)}
+            >
+                <FontAwesomeIcons name="trash-alt" size={22} color="#FFF"
                 // style={{ position: 'absolute', right: 0 }} 
                 />
             </RemoveButton>
@@ -61,4 +64,4 @@ const CartProductItem: React.FC<IProps> = ({
     )
 }
 
-export default CartProductItem;
+export default memo(CartProductItem)

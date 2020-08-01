@@ -2,7 +2,7 @@ import React, { useCallback, useState, useEffect, memo } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Text } from 'react-native'
 
-import { IProps, IMyItems } from './interfaces';
+import { IProps } from './interfaces';
 import {
     Container,
     ProductImage,
@@ -18,6 +18,7 @@ import {
     SubButton,
     AddButton
 } from './styles';
+import { IProduct } from 'src/Screens/Home/interfaces';
 
 const ProductItem: React.FC<IProps> = ({
     item,
@@ -25,7 +26,7 @@ const ProductItem: React.FC<IProps> = ({
     addToCartFunction,
     subtractFromCartFunction }) => {
 
-    const [myItem, setMyItem] = useState<IMyItems>({ ...item, isFavorite: false })
+    const [myItem, setMyItem] = useState<IProduct>({ ...item, isFavorite: false, formatedPrice: item.formatedPrice })
 
     return (
         <Container style={{ margin: 1 }}>
@@ -48,7 +49,7 @@ const ProductItem: React.FC<IProps> = ({
             </TopWrapper>
 
             <BottomWrapper>
-                <Price>R$ {myItem.price}</Price>
+                <Price>{myItem.formatedPrice}</Price>
                 {amount > 0
                     ?
                     <AmountWrapper>

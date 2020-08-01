@@ -33,7 +33,16 @@ const App = () => {
 							}}
 						/>
 
-						<Stack.Screen name="Cart" component={Cart} />
+						<Stack.Screen
+							name="Cart"
+							component={Cart}
+							options={{
+								headerStyle: {
+									backgroundColor: '#333'
+								},
+								headerTintColor: '#FFF'
+							}}
+						/>
 					</Stack.Navigator>
 				</NavigationContainer>
 			</Provider>

@@ -5,4 +5,5 @@ export interface IProduct {
     image: string
     isFavorite?: boolean
     amount: number
+    formatedPrice: string
 }

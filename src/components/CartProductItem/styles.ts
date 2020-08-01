@@ -5,13 +5,13 @@ import { Dimensions } from 'react-native';
 const imageHeight = '125px'
 
 export const Container = styled.View`
-  flex: 1;
   flex-direction: row;
   align-items: center;
 
-  margin: 5px 10px 0 10px;
-
+  margin: 5px 5px 0 5px;
   height: 125px;
+  background: #FFF;
+  border-radius: 4px;
 `;
 
 export const ProductDescriptionWrapper = styled.View`
@@ -31,11 +31,12 @@ export const ProductPrice = styled.Text`
 `;
 
 export const QuantityWrapper = styled.View`
-  flex-direction: row;
+  /* flex-direction: row; */
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 
-  width: 80px;
+  width: 50px;
+  height: ${imageHeight};
 
   /* border: 1px solid #333;
   border-radius: 100px;
@@ -54,20 +55,21 @@ const buttonStyle = styled(RectButton)`
   justify-content: center;
 `
 
-export const SubButton = styled(buttonStyle)`
-  
-`;
+export const SubButton = styled(buttonStyle)``;
 
 export const Amount = styled.Text``;
 
 export const AddButton = styled(buttonStyle)``;
 
 export const RemoveButton = styled(RectButton)`
-  height: 30px;
-  width: 30px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  
+  height: ${imageHeight};
+  width: 50px;
 
   background: #FC3366;
-  border-radius: 100px;
   
   align-items: center;
   justify-content: center;
