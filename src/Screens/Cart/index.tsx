@@ -1,12 +1,21 @@
 import React, { useCallback, useState } from 'react';
 import { FlatList, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
-import { Container, ItemSeparator } from './styles';
 import CartProductItem from '../../components/CartProductItem'
 import { IProduct } from '../Home/interfaces';
-import { addToCart, subtractFromCart, removeFromCart } from '../../store/reducers/cart/reducer'
+import { addToCart, subtractFromCart, removeFromCart, checkoutCart } from '../../store/reducers/cart/reducer'
 import { formatPrice } from '../../util/format'
+import {
+	Container,
+	CheckoutWrapper,
+	TotalWrapper,
+	TotalDescription,
+	TotalAmount,
+	CheckoutButton,
+	CheckoutButtonDescription
+} from './styles';
 
 const Cart: React.FC = () => {
 
@@ -19,6 +28,7 @@ const Cart: React.FC = () => {
 	const handleAddToCart = useCallback((item: IProduct) => dispatcher(addToCart(item)), [products])
 	const handleSubFromCart = useCallback((productId: number) => dispatcher(subtractFromCart(productId)), [products])
 	const handleRemoveFromCart = useCallback((productId: number) => dispatcher(removeFromCart(productId)), [products])
+	const handleCheckout = useCallback(() => dispatcher(checkoutCart()), [])
 
 	return (
 		<Container>
@@ -37,6 +47,23 @@ const Cart: React.FC = () => {
 					/>
 				)}
 			/>
+			<CheckoutWrapper>
+				<TotalWrapper>
+					<TotalDescription>Total:</TotalDescription>
+					<TotalAmount>{total}</TotalAmount>
+				</TotalWrapper>
+				<CheckoutButton
+					onPress={() => handleCheckout()}
+				>
+					<Icon
+						name="chevron-right"
+						color="#EEE"
+						size={32}
+						style={{position: 'absolute', left: 0, marginLeft: 7}}
+					/>
+					<CheckoutButtonDescription>Checkout</CheckoutButtonDescription>
+				</CheckoutButton>
+			</CheckoutWrapper>
 
 		</Container>
 	)

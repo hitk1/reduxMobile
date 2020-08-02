@@ -10,7 +10,7 @@ export const Container = styled.View`
     justify-content: space-around;
     margin-bottom: 3px;
     height: ${Math.floor(HEIGHT / 2.3)}px;
-    background-color: #eee;
+    background-color: #FFF;
     border-radius: 8px;
 `;
 

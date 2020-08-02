@@ -17,6 +17,10 @@ export const subtractFromCart = (productId: number): IActionFunction<number> => 
     data: productId
 })
 
+export const checkoutCart = (): IActionFunction<any> => ({
+    type: 'CHECKOUT_CART',
+    data: null
+})
 
 export default function cart(state = <IProduct[]>[], { type, data }: IActionFunction<any>): IProduct[] | undefined {
     switch (type) {
@@ -50,6 +54,10 @@ export default function cart(state = <IProduct[]>[], { type, data }: IActionFunc
                         draft.splice(productIndex, 1)
                 }
 
+            })
+        case 'CHECKOUT_CART':
+            return produce(state, (draft: IProduct[]) => {
+                draft.splice(0)
             })
 
         default: return state
